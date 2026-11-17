@@ -188,7 +188,7 @@ test('compiled suite config preserves runner paths and accepts a pixel-count bud
     assert.deepEqual(declared.use.launchOptions, {
       executablePath: '/inputs/runtime/chrome',
       chromiumSandbox: false,
-      args: ['--no-zygote'],
+      args: ['--font-render-hinting=none', '--no-zygote'],
     })
     assert.deepEqual(declared.use.viewport, {width: 800, height: 600})
   } finally {

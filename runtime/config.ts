@@ -77,7 +77,12 @@ export function visualConfig({
       launchOptions: {
         executablePath: required('VRT_CHROMIUM_EXECUTABLE'),
         chromiumSandbox: process.env.VRT_EXECUTION === 'local',
-        args: process.env.VRT_EXECUTION === 'local' ? [] : ['--no-zygote'],
+        // Headless Chromium defaults to full hinting, which autohints unhinted
+        // fonts and snaps glyph advances to whole pixels; match headed Chrome.
+        args: [
+          '--font-render-hinting=none',
+          ...(process.env.VRT_EXECUTION === 'local' ? [] : ['--no-zygote']),
+        ],
       },
     },
     testMatch: '**/.rules-visual.spec.ts',
